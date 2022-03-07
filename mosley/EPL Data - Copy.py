@@ -3,56 +3,37 @@ import csv
 
 def main():
     window = Tk()
-    window.title("Derbys and Rivalries Data")
-    window.geometry("500x500")
+    window.title("EPL Data")
+    window.geometry("225x150")
     window.configure(background = "black")
     window.iconbitmap("favicon.ico")
-    labl = Label(window, text = "Top 5 European Leagues", fg = "white", bg = "black")
-    lablBlank = Label(window, text = "", fg = "white", bg = "black")
-    buttEng = Button(window, text = "English Premier League", bg = "white", command = lambda: parse("English Premier League"))
-    lablBlank2 = Label(window, text = "", fg = "white", bg = "black")
-    buttFre = Button(window, text = "French Ligue 1", bg = "white", command = lambda: parse("French Ligue 1"))
-    lablBlank3 = Label(window, text = "", fg = "white", bg = "black")
-    buttSpa = Button(window, text = "Spanish La Liga", bg = "white", command = lambda: parse("Spanish La Liga"))
-    lablBlank4 = Label(window, text = "", fg = "white", bg = "black")
-    buttGer = Button(window, text = "German Bundesliga", bg = "white", command = lambda: parse("German Bundesliga"))
-    buttIta = Button(window, text = "Italian Serie A", bg = "white", command = lambda: parse("Italian Serie A"))
+    labl = Label(window, text = "English Premier League", fg = "white", bg = "black")
+    butt2014 = Button(window, text = "Manchester Derby", bg = "white", command = lambda: parse("MAN UTD", "MAN CITY"))
+    butt2015 = Button(window, text = "2015", bg = "white", command = lambda: parse("2015"))
+    butt2016 = Button(window, text = "2016", bg = "white", command = lambda: parse("2016"))
+    butt2017 = Button(window, text = "2017", bg = "white", command = lambda: parse("2017"))
 
     labl.pack()
-    buttEng.pack()
-    lablBlank.pack()
-    buttFre.pack()
-    lablBlank2.pack()
-    buttSpa.pack()
-    lablBlank3.pack()
-    buttGer.pack()
-    lablBlank4.pack()
-    buttIta.pack()
+    butt2014.pack()
+    butt2015.pack()
+    butt2016.pack()
+    butt2017.pack()
     
     window.mainloop()
 
-def parse(league):
-    title = (league, "Data")
-    window2 = Tk()
-    window2.title(title)
-    window2.geometry("500x500")
-    window2.configure(background = "black")
-    window2.iconbitmap("favicon.ico")
-    scrollbar = Scrollbar(window2)
-    scrollbar.pack(side = RIGHT, fill = Y)
+def parse(derby1, derby2):
     with open("english premier league data.csv") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
-            while row[40] == year:
-                text = (f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
-                labl = Label(window2, text = text, fg = "white", bg = "black").pack()
+            while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
+                print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
                 line_count += 1
                 break
         print(f'Processed {line_count} lines.')
 
-    window2.mainloop()
-
 main()
 
 #print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
+
+
