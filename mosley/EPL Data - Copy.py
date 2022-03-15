@@ -6,7 +6,6 @@ def main():
     window.title("European Derbys Data")
     window.geometry("250x250")
     window.configure(background = "black")
-    window.iconbitmap("favicon.ico")
     labl = Label(window, text = "European Leagues", fg = "white", bg = "black")
     buttEPL = Button(window, text = "English Premier League", bg = "white", command = lambda: epl())
 
@@ -20,7 +19,6 @@ def epl():
     window.title("EPL Data")
     window.geometry("300x300")
     window.configure(background = "black")
-    window.iconbitmap("favicon.ico")
     labl = Label(window, text = "English Premier League", fg = "white", bg = "black")
     buttMan = Button(window, text = "Manchester Derby", bg = "white", command = lambda: parse("MAN UTD", "MAN CITY"))
     buttLon = Button(window, text = "London Derby", bg = "white", command = lambda: parse("ARSENAL", "CHELSEA"))
