@@ -9,7 +9,7 @@ def main():
     window.iconbitmap("favicon.ico")
     labl = Label(window, text = "European Leagues", fg = "white", bg = "black")
     buttEPL = Button(window, text = "English Premier League", bg = "white", command = lambda: epl())
-    buttFL = Button(window, text = "French Ligue 1", bg = "white", command = lambda: fl())
+    buttFL = Button(window, text = "Spanish La Liga", bg = "white", command = lambda: sll())
 
     labl.pack()
     buttEPL.pack()
@@ -41,14 +41,14 @@ def epl():
     
     window.mainloop()
 
-def fl():
+def sll():
     window = Tk()
-    window.title("French Ligue 1 Data")
+    window.title("Spanish La Liga Data")
     window.geometry("300x300")
     window.configure(background = "black")
     window.iconbitmap("favicon.ico")
     labl = Label(window, text = "French Ligue 1", fg = "white", bg = "black")
-    buttRho = Button(window, text = "Derby Rhone-Alpine", bg = "white", command = lambda: parse("LYON", "SAINT-ÉTIENNE", "FL"))
+    buttElc = Button(window, text = "El Classico", bg = "white", command = lambda: parse("REAL MADRID", "BARCELONA", "SLL"))
     buttMan = Button(window, text = "Manchester Derby", bg = "white", command = lambda: parse("MAN UTD", "MAN CITY"))
     buttLon = Button(window, text = "London Derby", bg = "white", command = lambda: parse("ARSENAL", "CHELSEA"))
     buttNor = Button(window, text = "North London Derby", bg = "white", command = lambda: parse("TOTTENHAM", "ARSENAL"))
@@ -57,12 +57,12 @@ def fl():
     buttTyn = Button(window, text = "Tyne-Wear Derby", bg = "white", command = lambda: parse("SUNDERLAND", "NEWCASTLE"))
 
     labl.pack()
-    buttRho.pack()
-    buttLon.pack()
-    buttNor.pack()
-    buttWes.pack()
-    buttMer.pack()
-    buttTyn.pack()
+    buttElc.pack()
+    #buttLon.pack()
+    #buttNor.pack()
+    #buttWes.pack()
+    #buttMer.pack()
+    #buttTyn.pack()
     
     window.mainloop()
 
@@ -87,8 +87,8 @@ def parse(derby1, derby2, league):
 
                     line_count += 1
                     break
-    if league == "FL":
-        with open("french ligue1 data.csv") as csv_file:
+    if league == "SLL":
+        with open("spanish laliga data.csv") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
