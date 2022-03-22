@@ -1,7 +1,7 @@
 #Imports csv library
 import csv
-
-
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
 
 #Defines the subroutine csvimport
 def csvimport():
@@ -21,6 +21,22 @@ def csvimport():
     print(homeTeam)
 
 
+def matplot():
+
+    x = ['Man Utd', 'West Ham Utd', 'Chealsea', 'Manchester City', 'Liverpool']
+    energy = [48, 49, 57, 68, 75]
+
+    x_pos = [i for i, _ in enumerate(x)]
+
+    plt.bar(x_pos, energy, color='green')
+    plt.xlabel("Team")
+    plt.ylabel("Goals scored")
+    plt.title("Goals scored by top teams")
+
+    plt.xticks(x_pos, x)
+
+    plt.show()
+
 #Defines the subroutine main
 def main():
 
@@ -31,7 +47,7 @@ def main():
         #Accepts user input to choose from the menu options - Uses numbers so capitals dont matter - Could also use .Upper() function
         userChoice = input("------Menu------\n\n1. Read csv file\n\n2. Exit\n\n")
         if userChoice == "1":
-            csvimport()
+            matplot()
             print("\n\nSelect another option: \n")
         elif userChoice == "2":
             print("Quitting...")
