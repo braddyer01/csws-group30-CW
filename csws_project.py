@@ -20,26 +20,26 @@ def page_one():
                 window.geometry("300x550")
                 window.configure(background = "black")
                 labl = Label(window, text = "", fg = "white", bg = "black")
-                buttMan = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse(""))
-                buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse(""))
-                buttBrom = Button(window, text = "WEST BROM", bg = "white", command = lambda: parse(""))
-                buttSun = Button(window, text = "SUNDERLAND", bg = "white", command = lambda: parse(""))
-                buttLeic = Button(window, text = "LEICESTER CITY", bg = "white", command = lambda: parse(""))
-                buttEve = Button(window, text = "EVERTON", bg = "white", command = lambda: parse(""))
-                buttHam = Button(window, text = "WEST HAM", bg = "white", command = lambda: parse(""))
-                buttTot = Button(window, text = "TOTTENHAM", bg = "white", command = lambda: parse(""))
-                buttQpr = Button(window, text = "QPR", bg = "white", command = lambda: parse(""))
-                buttHull = Button(window, text = "HULL CITY", bg = "white", command = lambda: parse(""))
-                buttSto = Button(window, text = "STOKE", bg = "white", command = lambda: parse(""))
-                buttAst = Button(window, text = "ASTON VILLA", bg = "white", command = lambda: parse(""))
-                buttArs = Button(window, text = "ARSENAL", bg = "white", command = lambda: parse(""))
-                buttCry = Button(window, text = "CRYSTAL PALACE", bg = "white", command = lambda: parse(""))
-                buttLiv = Button(window, text = "LIVERPOOL", bg = "white", command = lambda: parse(""))
-                buttSouth = Button(window, text = "SOUTHAMPTON", bg = "white", command = lambda: parse(""))
-                buttNew = Button(window, text = "NEWCASTLE", bg = "white", command = lambda: parse(""))
-                buttMan = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse(""))
-                buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse(""))
-                buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse(""))
+                buttMan = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse_target(""))
+                buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse_target(""))
+                buttBrom = Button(window, text = "WEST BROM", bg = "white", command = lambda: parse_target(""))
+                buttSun = Button(window, text = "SUNDERLAND", bg = "white", command = lambda: parse_target(""))
+                buttLeic = Button(window, text = "LEICESTER CITY", bg = "white", command = lambda: parse_target(""))
+                buttEve = Button(window, text = "EVERTON", bg = "white", command = lambda: parse_target(""))
+                buttHam = Button(window, text = "WEST HAM", bg = "white", command = lambda: parse_target(""))
+                buttTot = Button(window, text = "TOTTENHAM", bg = "white", command = lambda: parse_target(""))
+                buttQpr = Button(window, text = "QPR", bg = "white", command = lambda: parse_target(""))
+                buttHull = Button(window, text = "HULL CITY", bg = "white", command = lambda: parse_target(""))
+                buttSto = Button(window, text = "STOKE", bg = "white", command = lambda: parse_target(""))
+                buttAst = Button(window, text = "ASTON VILLA", bg = "white", command = lambda: parse_target(""))
+                buttArs = Button(window, text = "ARSENAL", bg = "white", command = lambda: parse_target(""))
+                buttCry = Button(window, text = "CRYSTAL PALACE", bg = "white", command = lambda: parse_target(""))
+                buttLiv = Button(window, text = "LIVERPOOL", bg = "white", command = lambda: parse_target(""))
+                buttSouth = Button(window, text = "SOUTHAMPTON", bg = "white", command = lambda: parse_target(""))
+                buttNew = Button(window, text = "NEWCASTLE", bg = "white", command = lambda: parse_target(""))
+                buttMan = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse_target(""))
+                buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target(""))
+                buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target(""))
                 
                 labl.pack()
                 buttMan.pack()
@@ -64,14 +64,31 @@ def page_one():
                 buttChel.pack()
                 
                 window.mainloop()
-            def parse():
-                pos1 = []
-                pos2 = []
-                total = 0
-                total2 = 0
+            def parse_target():
+                Team_name = []
                 with open("english premier league data.csv") as csv_file:
                     csv_reader = csv.reader(csv_file, delimiter=',')
                     line_count = 0
+                    for row in csv_reader:
+                        while (row[1] == Team_name or row[2] == Team_name):
+                            print(f'\t{Team_name} in {row[40]}, postion:     ,:  ')
+                            if row[1] == Team_name:
+                                
+                                
+
+                            line_count += 1
+                            break
+                    for i in range(len(pos1)):
+                        total = total + int(pos1[i])
+                        total2 = total2 + int(pos2[i])
+                    avg = total / len(pos1)
+                    avg2 = total2 / len(pos2)
+                    avg = round(avg, 2)
+                    avg2 = round(avg2, 2)
+                    print(derby1, "Average Possesion: ", avg)
+                    print(derby2, "Average Possession", avg2)
+                    print(f'Processed {line_count} lines.')
+                
             main()
             
         
@@ -503,12 +520,12 @@ def page_six():
 #main menu-------------------------------------------------------------------------------------------------------    
 def menu():
     print ("""-------------------MENU-------------------
-    1) Losses VS Crime
-    2) Average Possession
+    1) Target Shots vs Position
+    2) Top vs Bttom League Comparison
     3) Rivals VS Average
     4) Half Time VS End
-    5) ...
-    6) ...
+    5) Points Per Season
+    6) Popularity vs Result
     0) EXIT
     """)
     main_choice()
