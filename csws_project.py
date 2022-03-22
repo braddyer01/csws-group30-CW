@@ -20,29 +20,29 @@ def page_one():
                 window.geometry("300x550")
                 window.configure(background = "black")
                 labl = Label(window, text = "", fg = "white", bg = "black")
-                buttMan = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse_target(""))
-                buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse_target(""))
-                buttBrom = Button(window, text = "WEST BROM", bg = "white", command = lambda: parse_target(""))
-                buttSun = Button(window, text = "SUNDERLAND", bg = "white", command = lambda: parse_target(""))
-                buttLeic = Button(window, text = "LEICESTER CITY", bg = "white", command = lambda: parse_target(""))
-                buttEve = Button(window, text = "EVERTON", bg = "white", command = lambda: parse_target(""))
-                buttHam = Button(window, text = "WEST HAM", bg = "white", command = lambda: parse_target(""))
-                buttTot = Button(window, text = "TOTTENHAM", bg = "white", command = lambda: parse_target(""))
-                buttQpr = Button(window, text = "QPR", bg = "white", command = lambda: parse_target(""))
-                buttHull = Button(window, text = "HULL CITY", bg = "white", command = lambda: parse_target(""))
-                buttSto = Button(window, text = "STOKE", bg = "white", command = lambda: parse_target(""))
-                buttAst = Button(window, text = "ASTON VILLA", bg = "white", command = lambda: parse_target(""))
-                buttArs = Button(window, text = "ARSENAL", bg = "white", command = lambda: parse_target(""))
-                buttCry = Button(window, text = "CRYSTAL PALACE", bg = "white", command = lambda: parse_target(""))
-                buttLiv = Button(window, text = "LIVERPOOL", bg = "white", command = lambda: parse_target(""))
-                buttSouth = Button(window, text = "SOUTHAMPTON", bg = "white", command = lambda: parse_target(""))
-                buttNew = Button(window, text = "NEWCASTLE", bg = "white", command = lambda: parse_target(""))
-                buttMan = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse_target(""))
-                buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target(""))
-                buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target(""))
+                buttManutd = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse_target("MAN UTD"))
+                buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse_target())
+                buttBrom = Button(window, text = "WEST BROM", bg = "white", command = lambda: parse_target())
+                buttSun = Button(window, text = "SUNDERLAND", bg = "white", command = lambda: parse_target())
+                buttLeic = Button(window, text = "LEICESTER CITY", bg = "white", command = lambda: parse_target())
+                buttEve = Button(window, text = "EVERTON", bg = "white", command = lambda: parse_target())
+                buttHam = Button(window, text = "WEST HAM", bg = "white", command = lambda: parse_target())
+                buttTot = Button(window, text = "TOTTENHAM", bg = "white", command = lambda: parse_target())
+                buttQpr = Button(window, text = "QPR", bg = "white", command = lambda: parse_target())
+                buttHull = Button(window, text = "HULL CITY", bg = "white", command = lambda: parse_target())
+                buttSto = Button(window, text = "STOKE", bg = "white", command = lambda: parse_target())
+                buttAst = Button(window, text = "ASTON VILLA", bg = "white", command = lambda: parse_target())
+                buttArs = Button(window, text = "ARSENAL", bg = "white", command = lambda: parse_target())
+                buttCry = Button(window, text = "CRYSTAL PALACE", bg = "white", command = lambda: parse_target())
+                buttLiv = Button(window, text = "LIVERPOOL", bg = "white", command = lambda: parse_target())
+                buttSouth = Button(window, text = "SOUTHAMPTON", bg = "white", command = lambda: parse_target())
+                buttNew = Button(window, text = "NEWCASTLE", bg = "white", command = lambda: parse_target())
+                buttMancity = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse_target())
+                buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target())
+                buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target())
                 
                 labl.pack()
-                buttMan.pack()
+                buttManutd.pack()
                 buttSwan.pack()
                 buttBrom.pack()
                 buttSun.pack()
@@ -59,35 +59,30 @@ def page_one():
                 buttLiv.pack()
                 buttSouth.pack()
                 buttNew.pack()
-                buttMan.pack()
+                buttMancity.pack()
                 buttBurn.pack()
                 buttChel.pack()
                 
                 window.mainloop()
-            def parse_target():
-                Team_name = []
-                with open("english premier league data.csv") as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',')
-                    line_count = 0
-                    for row in csv_reader:
-                        while (row[1] == Team_name or row[2] == Team_name):
-                            print(f'\t{Team_name} in {row[40]}, postion:     ,:  ')
-                            if row[1] == Team_name:
-                                
-                                
-
-                            line_count += 1
-                            break
-                    for i in range(len(pos1)):
-                        total = total + int(pos1[i])
-                        total2 = total2 + int(pos2[i])
-                    avg = total / len(pos1)
-                    avg2 = total2 / len(pos2)
-                    avg = round(avg, 2)
-                    avg2 = round(avg2, 2)
-                    print(derby1, "Average Possesion: ", avg)
-                    print(derby2, "Average Possession", avg2)
-                    print(f'Processed {line_count} lines.')
+            def parse_target(Team_name):
+                counter = 0
+                target1 = 0
+                with open("position.csv") as csv_file:
+                    with open("english premier league data.csv") as csv_file:
+                     csv_reader = csv.reader(csv_file, delimiter=',')
+                     line_count = 0
+                     for row in csv_reader:
+                         while (row[1] == Team_name or row[2] == Team_name):
+                             while(row[40] == "2014"):
+                                print(f'\t{Team_name} in {row[40]}, position ')
+                                if row[1] == Team_name:
+                                    target0 = float(row[10])
+                                    target1 = target1 + target0
+                                    counter = counter + 1
+                                    target0 == 0 
+                                line_count += 1
+                                break
+                   
                 
             main()
             
