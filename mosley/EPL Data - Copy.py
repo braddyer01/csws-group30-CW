@@ -10,12 +10,14 @@ def choice(derby1, derby2):
     window.configure(background = "black")
     window.iconbitmap("favicon.ico")
     labl = Label(window, text = "Visualisation Choices", fg = "white", bg = "black")
-    buttEPL = Button(window, text = "Possession", bg = "white", command = lambda: parse(derby1, derby2, "Possession"))
-    buttFL = Button(window, text = "Goals", bg = "white", command = lambda: parse(derby1, derby2, "Goals"))
+    buttPos = Button(window, text = "Possession", bg = "white", command = lambda: parse(derby1, derby2, "Possession"))
+    buttGoal = Button(window, text = "Goals", bg = "white", command = lambda: parse(derby1, derby2, "Goals"))
+    buttCards = Button(window, text = "Cards", bg = "white", command = lambda: parse(derby1, derby2, "Cards"))
 
     labl.pack()
-    buttEPL.pack()
-    buttFL.pack()
+    buttPos.pack()
+    buttGoal.pack()
+    buttCards.pack()
     
     window.mainloop()
     
@@ -46,8 +48,16 @@ def main():
 def parse(derby1, derby2, choice1):
     pos1 = []
     pos2 = []
+    yellow1 = []
+    yellow2 = []
+    red1 = []
+    red2 = []
     total = 0
     total2 = 0
+    totalYellow1 = 0
+    totalYellow2 = 0
+    totalRed1 = 0
+    totalRed2 = 0
    
     with open("english premier league data.csv") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -107,6 +117,48 @@ def parse(derby1, derby2, choice1):
             labelList = [derby1 + "\n" + str(avg), derby2 + "\n" + str(avg2)]
             print(derby1, "Average Goals: ", avg)
             print(derby2, "Average Goals:", avg2)
+            print(f'Processed {line_count} lines.')
+            plt.title("Average Goals")
+            plt.pie(pieVal, labels = labelList, shadow = True)
+            plt.show()
+
+        if choice1 == "Cards":
+            for row in csv_reader:
+                while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
+                    print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
+                    if row[1] == derby1: 
+                        yellow1.append(float(row[21]) + float(row[22]))
+                        yellow2.append(float(row[34]) + float(row[35]))
+                        red1.append(row[23])
+                        red2.append(row[36])
+                    else:
+                        yellow2.append(row[21] + row[22])
+                        yellow1.append(row[34] + row[35])
+                        red2.append(row[23])
+                        red1.append(row[36])
+
+                    line_count += 1
+                    break
+                
+            for i in range(len(yellow1)):
+                totalYellow1 = totalYellow1 + int(yellow1[i])
+                totalYellow2 = totalYellow2 + int(yellow2[i])
+                totalRed1 = totalRed1 + int(red1[i])
+                totalRed2 = totalRed2 + int(red2[i])
+            avgYellow1 = totalYellow1 / len(yellow1)
+            avgYellow2 = totalYellow2 / len(yellow2)
+            avgRed = totalRed1 / len(red1)
+            avgRed2 = totalRed2 / len(red2)
+            avgYellow1 = round(avgYellow1, 2)
+            avgYellow2 = round(avgYellow2, 2)
+            avgRed = round(avgRed, 2)
+            avgRed = round(avgRed2, 2)
+            pieVal = np.array([avgYellow1, avgRed, avgYellow2, avgRed2])
+            labelList = [derby1 + " Yellow Cards\n" + str(avgYellow1), derby1 + " Red Cards\n" + str(avgRed), derby2 + " Yellow Cards\n" + str(avgYellow2), derby2 + " Red Cards\n" + str(avgRed2)]
+            print(derby1, "Average Yellow Cards: ", avgYellow1)
+            print(derby2, "Average Yellow Cards:", avgYellow2)
+            print(derby1, "Average Red Cards: ", avgRed)
+            print(derby2, "Average Red Cards: ", avgRed2)
             print(f'Processed {line_count} lines.')
             plt.title("Average Goals")
             plt.pie(pieVal, labels = labelList, shadow = True)
