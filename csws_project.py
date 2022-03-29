@@ -1,12 +1,15 @@
 #imports---------------------------------------------------------------------------------------------------------
 from tkinter import *
 import csv
+import numpy as np
+import matplotlib.pyplot as plt
 #page one--------------------------------------------------------------------------------------------------------
 def page_one():
     key = 0
     print ("""-------------------PAGE1-------------------
     1) View Data
-    0)EXIT
+    2) Visualisation
+    0) EXIT
 """)
     while key == 0:
         choice = input("""Please choose a page option: """)
@@ -67,25 +70,72 @@ def page_one():
             def parse_target(Team_name):
                 counter = 0
                 target1 = 0
-                with open("position.csv") as csv_file:
-                    with open("english premier league data.csv") as csv_file:
-                     csv_reader = csv.reader(csv_file, delimiter=',')
-                     line_count = 0
-                     for row in csv_reader:
-                         while (row[1] == Team_name or row[2] == Team_name):
-                             while(row[40] == "2014"):
-                                print(f'\t{Team_name} in {row[40]}, position ')
-                                if row[1] == Team_name:
-                                    target0 = float(row[10])
-                                    target1 = target1 + target0
-                                    counter = counter + 1
-                                    target0 == 0 
-                                line_count += 1
-                                break
+                
+                with open("english premier league data.csv") as csv_file:
+                    csv_reader = csv.reader(csv_file, delimiter=",")
+                    line_count = 0
+                    for row in csv_reader:
+                        year = {row[40]}
+                        name = {row[1]} or {row[2]}
+                with open("position.csv") as csv_file2:
+                    csv_reader2 = csv.reader(csv_file2, delimiter= ",")
+                    line_count = 0
+                    for row in csv_reader2:
+                        name2 = {row[1]}
+                        position14 = {row[2]}
+                        position15 = {row[3]}
+                        position16 = {row[4]}
+                        position17 = {row[5]}
+                        position18 = {row[6]}
+                        position19 = {row[7]}
+                        position20 = {row[8]}
+                while (name == Team_name and name2 == Team_name):
+                        print (year)
+                        if (year == "2014" ):
+                            position = position14
+                        elif (year == "2015"):
+                            position = position15
+                        elif (year == "2016"):
+                            position = position16
+                        elif (year == "2017"):
+                            position = position17
+                        elif (year == "2018"):
+                            position = position18
+                        elif (year == "2019"):
+                            position = position19
+                        elif (year == "2020"):
+                            position = position20
+                        print(f'\t{Team_name} in {year}, position {position}  ')
+                        if name == Team_name:
+                            target0 = float(row[10])
+                            target1 = target1 + target0
+                            counter = counter + 1
+                            target0 == 0 
+                            line_count += 1
+                            break
                    
                 
             main()
-            
+        elif (choice == "2"):
+            plt.figure(figsize=(8, 5), dpi=80)
+            plt.subplot(111)
+
+            X = np.linspace(-np.pi, np.pi, 256)
+            C = np.cos(X)
+            S = np.sin(X)
+
+            plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-")
+            plt.plot(X, S, color="red", linewidth=2.5, linestyle="-")
+
+            plt.xlim(X.min() * 1.1, X.max() * 1.1)
+            plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
+                    [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
+
+            plt.ylim(C.min() * 1.1, C.max() * 1.1)
+            plt.yticks([-1, 0, +1],
+                    [r'$-1$', r'$0$', r'$+1$'])
+
+            plt.show()
         
         else:
             print ("Invalid input")
@@ -102,77 +152,9 @@ def page_two():
             key = 1
             menu()
         elif choice == "1":
-            def main():
-                window = Tk()
-                window.title("")
-                window.geometry("250x250")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttEPL = Button(window, text = "", bg = "white", command = lambda: epl())
-
-                labl.pack()
-                buttEPL.pack()
-                
-                window.mainloop()
-            def epl():
-                window = Tk()
-                window.title("EPL Data")
-                window.geometry("300x300")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttMan = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttLon = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttNor = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttWes = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttMer = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttTyn = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-
-                labl.pack()
-                buttMan.pack()
-                buttLon.pack()
-                buttNor.pack()
-                buttWes.pack()
-                buttMer.pack()
-                buttTyn.pack()
-                
-                window.mainloop()
-
-            def parse(derby1, derby2):
-                pos1 = []
-                pos2 = []
-                total = 0
-                total2 = 0
-                with open("english premier league data.csv") as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',')
-                    line_count = 0
-                    for row in csv_reader:
-                        while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
-                            print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
-                            if row[1] == derby1:
-                                pos1.append(row[8])
-                                pos2.append(row[9])
-                            else:
-                                pos1.append(row[9])
-                                pos2.append(row[8])
-
-                            line_count += 1
-                            break
-                    for i in range(len(pos1)):
-                        total = total + int(pos1[i])
-                        total2 = total2 + int(pos2[i])
-                    avg = total / len(pos1)
-                    avg2 = total2 / len(pos2)
-                    avg = round(avg, 2)
-                    avg2 = round(avg2, 2)
-                    print(derby1, "Average Possesion: ", avg)
-                    print(derby2, "Average Possession", avg2)
-                    print(f'Processed {line_count} lines.')
-
-        main()
-            
-        
-    else:
-        print ("Invalid input")
+            print(".")
+        else:
+            print ("Invalid input")
 
 #page three------------------------------------------------------------------------------------------------------
 def page_three():
@@ -271,77 +253,9 @@ def page_four():
             key = 1
             menu()
         elif choice == "1":
-            def main():
-                window = Tk()
-                window.title("")
-                window.geometry("250x250")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttEPL = Button(window, text = "", bg = "white", command = lambda: epl())
-
-                labl.pack()
-                buttEPL.pack()
-                
-                window.mainloop()
-            def epl():
-                window = Tk()
-                window.title("EPL Data")
-                window.geometry("300x300")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttMan = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttLon = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttNor = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttWes = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttMer = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttTyn = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-
-                labl.pack()
-                buttMan.pack()
-                buttLon.pack()
-                buttNor.pack()
-                buttWes.pack()
-                buttMer.pack()
-                buttTyn.pack()
-                
-                window.mainloop()
-
-            def parse(derby1, derby2):
-                pos1 = []
-                pos2 = []
-                total = 0
-                total2 = 0
-                with open("english premier league data.csv") as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',')
-                    line_count = 0
-                    for row in csv_reader:
-                        while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
-                            print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
-                            if row[1] == derby1:
-                                pos1.append(row[8])
-                                pos2.append(row[9])
-                            else:
-                                pos1.append(row[9])
-                                pos2.append(row[8])
-
-                            line_count += 1
-                            break
-                    for i in range(len(pos1)):
-                        total = total + int(pos1[i])
-                        total2 = total2 + int(pos2[i])
-                    avg = total / len(pos1)
-                    avg2 = total2 / len(pos2)
-                    avg = round(avg, 2)
-                    avg2 = round(avg2, 2)
-                    print(derby1, "Average Possesion: ", avg)
-                    print(derby2, "Average Possession", avg2)
-                    print(f'Processed {line_count} lines.')
-
-        main()
-            
-        
-    else:
-        print ("Invalid input")
+            print(".")
+        else:
+            print ("Invalid input")
 #page five------------------------------------------------------------------------------------------------------
 def page_five():
     key = 0
@@ -355,77 +269,9 @@ def page_five():
             key = 1
             menu()
         elif choice == "1":
-            def main():
-                window = Tk()
-                window.title("")
-                window.geometry("250x250")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttEPL = Button(window, text = "", bg = "white", command = lambda: epl())
-
-                labl.pack()
-                buttEPL.pack()
-                
-                window.mainloop()
-            def epl():
-                window = Tk()
-                window.title("EPL Data")
-                window.geometry("300x300")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttMan = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttLon = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttNor = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttWes = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttMer = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttTyn = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-
-                labl.pack()
-                buttMan.pack()
-                buttLon.pack()
-                buttNor.pack()
-                buttWes.pack()
-                buttMer.pack()
-                buttTyn.pack()
-                
-                window.mainloop()
-
-            def parse(derby1, derby2):
-                pos1 = []
-                pos2 = []
-                total = 0
-                total2 = 0
-                with open("english premier league data.csv") as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',')
-                    line_count = 0
-                    for row in csv_reader:
-                        while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
-                            print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
-                            if row[1] == derby1:
-                                pos1.append(row[8])
-                                pos2.append(row[9])
-                            else:
-                                pos1.append(row[9])
-                                pos2.append(row[8])
-
-                            line_count += 1
-                            break
-                    for i in range(len(pos1)):
-                        total = total + int(pos1[i])
-                        total2 = total2 + int(pos2[i])
-                    avg = total / len(pos1)
-                    avg2 = total2 / len(pos2)
-                    avg = round(avg, 2)
-                    avg2 = round(avg2, 2)
-                    print(derby1, "Average Possesion: ", avg)
-                    print(derby2, "Average Possession", avg2)
-                    print(f'Processed {line_count} lines.')
-
-        main()
-            
-        
-    else:
-        print ("Invalid input")
+            print(".")
+        else:
+            print ("Invalid input")
 #page six------------------------------------------------------------------------------------------------------
 def page_six():
     key = 0
@@ -440,77 +286,14 @@ def page_six():
             key = 1
             menu()
         elif choice == "1":
-            def main():
-                window = Tk()
-                window.title("")
-                window.geometry("250x250")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttEPL = Button(window, text = "", bg = "white", command = lambda: epl())
+            (".")
+        else:
+            print ("Invalid input")
 
-                labl.pack()
-                buttEPL.pack()
-                
-                window.mainloop()
-            def epl():
-                window = Tk()
-                window.title("EPL Data")
-                window.geometry("300x300")
-                window.configure(background = "black")
-                labl = Label(window, text = "", fg = "white", bg = "black")
-                buttMan = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttLon = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttNor = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttWes = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttMer = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
-                buttTyn = Button(window, text = "", bg = "white", command = lambda: parse("", ""))
 
-                labl.pack()
-                buttMan.pack()
-                buttLon.pack()
-                buttNor.pack()
-                buttWes.pack()
-                buttMer.pack()
-                buttTyn.pack()
-                
-                window.mainloop()
-
-            def parse(derby1, derby2):
-                pos1 = []
-                pos2 = []
-                total = 0
-                total2 = 0
-                with open("english premier league data.csv") as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=',')
-                    line_count = 0
-                    for row in csv_reader:
-                        while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
-                            print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
-                            if row[1] == derby1:
-                                pos1.append(row[8])
-                                pos2.append(row[9])
-                            else:
-                                pos1.append(row[9])
-                                pos2.append(row[8])
-
-                            line_count += 1
-                            break
-                    for i in range(len(pos1)):
-                        total = total + int(pos1[i])
-                        total2 = total2 + int(pos2[i])
-                    avg = total / len(pos1)
-                    avg2 = total2 / len(pos2)
-                    avg = round(avg, 2)
-                    avg2 = round(avg2, 2)
-                    print(derby1, "Average Possesion: ", avg)
-                    print(derby2, "Average Possession", avg2)
-                    print(f'Processed {line_count} lines.')
-
-        main()
             
         
-    else:
-        print ("Invalid input")
+    
 
 #main menu-------------------------------------------------------------------------------------------------------    
 def menu():
