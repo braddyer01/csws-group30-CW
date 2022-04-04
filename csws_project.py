@@ -67,26 +67,27 @@ def page_one():
                 buttChel.pack()
                 
                 window.mainloop()
-            def parse_target(Team_name):
-                counter = 0
-                target1 = 0
+            def parse_target(teamName):
                 
                 with open("english premier league data.csv") as csv_file:
                     csv_reader = csv.reader(csv_file, delimiter=",")
-                    line_count = 0
+                    lineCount = 0
+                    counter = 0
+                    target0 = 0
+                    target1 = 0
                     for row in csv_reader:
-                        year = {row[40]}
-                        name = {row[1]} or {row[2]}
-                while (name == Team_name):
-                        print (year)
-                        print(f'\t{Team_name} in {year}, position   ')
-                        if name == Team_name:
-                            target0 = float(row[10])
-                            target1 = target1 + target0
+                        
+                        while ({row[1]} or {row[2]} == teamName):
+                            if ({row[1]} == teamName):
+                                target1 = row[11]
+                            elif({row[2]} == teamName):
+                                target1 = row[24]
+                            target0 = target0 + target1
                             counter = counter + 1
-                            target0 == 0 
-                            line_count += 1
+                            lineCount += 1
                             break
+                        targetAverage = target0 / counter
+                print(f'\t{teamName}, position , {targetAverage}   ')
                    
                 
             main()
