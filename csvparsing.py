@@ -13,7 +13,7 @@ def csvimport():
     with open('english premier league data.csv', 'r') as csvfile:
         
         lines = csvfile.readlines()
-        goals = 0
+        goals = ()
         MANUTD = 0
         CHEAL = 0
         MANCIT = 0
@@ -103,7 +103,27 @@ def csvimport():
 
 
         
-    
+    goals.append(MANUTD)
+    goals.append(CHEAL)
+    goals.append(MANCIT)
+    goals.append(ARSENAL)
+    goals.append(LIVERPOOL)
+    goals.append(SPURS)
+    goals.append(LEISTER)
+    goals.append(EVERTON)
+    goals.append(VILLA)
+    goals.append(SOUTHHAMPT)
+    goals.append(WESTHAM)
+    goals.append(NEWCASTLE)
+    goals.append(WOLVES)
+    goals.append(WATFORD)
+    goals.append(CRYSTAL)
+    goals.append(NORWICH)
+    goals.append(LEEDS)
+    goals.append(BRIGHTON)
+    goals.append(BURNLEY)
+    goals.append(WESTBROM)
+
     #Prints list of csv cells
     print(goals)
 
