@@ -1,14 +1,13 @@
 #Imports csv library
 import csv
-from http.client import BAD_REQUEST
-from os import putenv
 import matplotlib.pyplot as plt
 import numpy as np
-from sqlalchemy import Integer
-plt.style.use('ggplot')
+from tkinter import *
+
 
 #Defines the subroutine csvimport
 def csvimport():
+    
     
     
     #Opens the csv file and creates a reader that puts the lines into a list variable
@@ -16,6 +15,7 @@ def csvimport():
         
         lines = csvfile.readlines()
         goals = []
+        titles = [20,6,7,13,19,2,1,9,7,0,0,4,3,0,0,0,3,0,2,0]
         MANUTD = 0
         CHEAL = 0
         MANCIT = 0
@@ -186,25 +186,29 @@ def csvimport():
     goals.append(WESTBROM)
 
     #Prints list of csv cells
-    print(goals)
+    
+    
+    x = np.arange(20)
+    y1 = goals
+    y2 = titles
+    width = 0.4
+        
+        
+    plt.bar(x-0.2, y1, width)
+    plt.bar(x+0.2, y2, width)
+    plt.xticks(x, ['MAN UTD', 'CHELSEA', 'MAN CITY', 'ARSENAL', 'LPOOL', 'SPURS', 'LEICESTER', 'EVERTON', 'ASTON VILLA', 'SOUTHAMPTON', 'WEST HAM', 'NEWCASTLE', 'WOLVES', 'WATFORD', 'CRYSTAL PALACE', 'NORWICH', 'LEEDS', 'BRIGHTON', 'BURNLEY', 'BRENTFORD'])
+    plt.xlabel("Teams (In order of popularity)")
+    plt.ylabel("Goals Scored (Blue) Titles Won (Orange)")
 
+    plt.show()
 
-def matplot():
-    data = [[30, 25, 50, 20],
-    [40, 23, 51, 17],
-    [35, 22, 45, 19]]
-    X = np.arange(4)
-    fig = plt.figure()
-    ax = fig.add_axes([0,0,1,1])
-    ax.bar(X + 0.00, data[0], color = 'b', width = 0.25)
-    ax.bar(X + 0.25, data[1], color = 'g', width = 0.25)
-    ax.bar(X + 0.50, data[2], color = 'r', width = 0.25)
-
+   
+        
+        
+       
     
 #Defines the subroutine main
 def main():
-    
-
     #Creates a loop for the main menu
     loop = "0"
     while loop == "0":
@@ -212,7 +216,7 @@ def main():
         #Accepts user input to choose from the menu options - Uses numbers so capitals dont matter - Could also use .Upper() function
         userChoice = input("------Menu------\n\n1. Read csv file\n\n2. Exit\n\n")
         if userChoice == "1":
-            matplot()
+            csvimport()
             print("\n\nSelect another option: \n")
         elif userChoice == "2":
             print("Quitting...")
