@@ -11,14 +11,17 @@ def csvimport():
     with open('english premier league data1.csv', 'r') as csvfile:
         
         lines = csvfile.readlines()
-        homeTeam = []
+        MANUTD = 0
         for line in lines:
             data = line.split(',')
-            homeTeam.append(data[1])
+            if (data[1]) == "MAN UTD":
+                MANUTD = MANUTD + (data[36])
+
+
         
     
     #Prints list of csv cells
-    print(homeTeam)
+    print(MANUTD)
 
 
 def matplot():
@@ -47,7 +50,7 @@ def main():
         #Accepts user input to choose from the menu options - Uses numbers so capitals dont matter - Could also use .Upper() function
         userChoice = input("------Menu------\n\n1. Read csv file\n\n2. Exit\n\n")
         if userChoice == "1":
-            matplot()
+            csvimport()
             print("\n\nSelect another option: \n")
         elif userChoice == "2":
             print("Quitting...")
