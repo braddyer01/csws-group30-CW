@@ -13,7 +13,7 @@ def csvimport():
     with open('english premier league data.csv', 'r') as csvfile:
         
         lines = csvfile.readlines()
-        goals = ()
+        goals = []
         MANUTD = 0
         CHEAL = 0
         MANCIT = 0
@@ -97,6 +97,65 @@ def csvimport():
                 
             elif (data[1]) == "WEST BROM":
                 WESTBROM = WESTBROM + int(data[36])
+
+            if (data[2]) == "MAN UTD":
+                MANUTD = MANUTD + int(data[37])
+            elif (data[2]) == "CHELSEA":
+                CHEAL = CHEAL + int(data[37])
+               
+            elif (data[2]) == "MAN CITY":
+                MANCIT = MANCIT + int(data[37])
+                
+            elif (data[2]) == "ARSENAL":
+                ARSENAL = ARSENAL + int(data[37])
+                
+            elif (data[2]) == "LIVERPOOL":
+                LIVERPOOL = LIVERPOOL + int(data[37])
+                
+            elif (data[2]) == "TOTTENHAM":
+                 SPURS = SPURS + int(data[37])
+                
+            elif (data[2]) == "LEICESTER CITY":
+                LEISTER = LEISTER + int(data[37])
+               
+            elif (data[2]) == "EVERTON":
+                EVERTON = EVERTON + int(data[37])
+                
+            elif (data[2]) == "ASTON VILLA":
+                VILLA = VILLA + int(data[37])
+                
+            elif (data[2]) == "SOUTHHAMPTON":
+                SOUTHHAMPT = SOUTHHAMPT + int(data[37])
+                
+            elif (data[2]) == "WEST HAM":
+                WESTHAM = WESTHAM + int(data[37])
+                
+            elif (data[2]) == "NEWCASTLE":
+                NEWCASTLE = NEWCASTLE + int(data[37])
+                
+            elif (data[2]) == "WOLVES":
+                WOLVES = WOLVES + int(data[37])
+                
+            elif (data[2]) == "WATFORD":
+                WATFORD = WATFORD + int(data[37])
+               
+            elif (data[2]) == "CRYSTAL PALACE":
+                CRYSTAL = CRYSTAL + int(data[37])
+               
+            elif (data[2]) == "NORWICH":
+                NORWICH = NORWICH + int(data[37])
+              
+            elif (data[2]) == "LEEDS UTD":
+                LEEDS = LEEDS + int(data[37])
+                
+            elif (data[2]) == "BRIGHTON":
+                BRIGHTON = BRIGHTON + int(data[37])
+                
+            elif (data[2]) == "BURNLEY":
+                BURNLEY = BURNLEY + int(data[37])
+                
+            elif (data[2]) == "WEST BROM":
+                WESTBROM = WESTBROM + int(data[37])
                 
 
     
