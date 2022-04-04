@@ -24,25 +24,25 @@ def page_one():
                 window.configure(background = "black")
                 labl = Label(window, text = "", fg = "white", bg = "black")
                 buttManutd = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse_target("MAN UTD"))
-                buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse_target())
-                buttBrom = Button(window, text = "WEST BROM", bg = "white", command = lambda: parse_target())
-                buttSun = Button(window, text = "SUNDERLAND", bg = "white", command = lambda: parse_target())
-                buttLeic = Button(window, text = "LEICESTER CITY", bg = "white", command = lambda: parse_target())
-                buttEve = Button(window, text = "EVERTON", bg = "white", command = lambda: parse_target())
-                buttHam = Button(window, text = "WEST HAM", bg = "white", command = lambda: parse_target())
-                buttTot = Button(window, text = "TOTTENHAM", bg = "white", command = lambda: parse_target())
-                buttQpr = Button(window, text = "QPR", bg = "white", command = lambda: parse_target())
-                buttHull = Button(window, text = "HULL CITY", bg = "white", command = lambda: parse_target())
-                buttSto = Button(window, text = "STOKE", bg = "white", command = lambda: parse_target())
-                buttAst = Button(window, text = "ASTON VILLA", bg = "white", command = lambda: parse_target())
-                buttArs = Button(window, text = "ARSENAL", bg = "white", command = lambda: parse_target())
-                buttCry = Button(window, text = "CRYSTAL PALACE", bg = "white", command = lambda: parse_target())
-                buttLiv = Button(window, text = "LIVERPOOL", bg = "white", command = lambda: parse_target())
-                buttSouth = Button(window, text = "SOUTHAMPTON", bg = "white", command = lambda: parse_target())
-                buttNew = Button(window, text = "NEWCASTLE", bg = "white", command = lambda: parse_target())
-                buttMancity = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse_target())
-                buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target())
-                buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target())
+                buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse_target("SWANSEA"))
+                buttBrom = Button(window, text = "WEST BROM", bg = "white", command = lambda: parse_target("WEST BROM"))
+                buttSun = Button(window, text = "SUNDERLAND", bg = "white", command = lambda: parse_target("SUNDERLAND"))
+                buttLeic = Button(window, text = "LEICESTER CITY", bg = "white", command = lambda: parse_target("LEICESTER CITY"))
+                buttEve = Button(window, text = "EVERTON", bg = "white", command = lambda: parse_target("EVERTON"))
+                buttHam = Button(window, text = "WEST HAM", bg = "white", command = lambda: parse_target("WEST HAM"))
+                buttTot = Button(window, text = "TOTTENHAM", bg = "white", command = lambda: parse_target("TOTTENHAM"))
+                buttQpr = Button(window, text = "QPR", bg = "white", command = lambda: parse_target("QPR"))
+                buttHull = Button(window, text = "HULL CITY", bg = "white", command = lambda: parse_target("HULL CITY"))
+                buttSto = Button(window, text = "STOKE", bg = "white", command = lambda: parse_target("STOKE"))
+                buttAst = Button(window, text = "ASTON VILLA", bg = "white", command = lambda: parse_target("ASTON VILLA"))
+                buttArs = Button(window, text = "ARSENAL", bg = "white", command = lambda: parse_target("ARSENAL"))
+                buttCry = Button(window, text = "CRYSTAL PALACE", bg = "white", command = lambda: parse_target("CRYSTAL PALACE"))
+                buttLiv = Button(window, text = "LIVERPOOL", bg = "white", command = lambda: parse_target("LIVERPOOL"))
+                buttSouth = Button(window, text = "SOUTHAMPTON", bg = "white", command = lambda: parse_target("SOUTHAMPTON"))
+                buttNew = Button(window, text = "NEWCASTLE", bg = "white", command = lambda: parse_target("NEWCASTLE"))
+                buttMancity = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse_target( "MAN CITY"))
+                buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target("BURNLEY"))
+                buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target("CHELSEA"))
                 
                 labl.pack()
                 buttManutd.pack()
@@ -77,35 +77,9 @@ def page_one():
                     for row in csv_reader:
                         year = {row[40]}
                         name = {row[1]} or {row[2]}
-                with open("position.csv") as csv_file2:
-                    csv_reader2 = csv.reader(csv_file2, delimiter= ",")
-                    line_count = 0
-                    for row in csv_reader2:
-                        name2 = {row[1]}
-                        position14 = {row[2]}
-                        position15 = {row[3]}
-                        position16 = {row[4]}
-                        position17 = {row[5]}
-                        position18 = {row[6]}
-                        position19 = {row[7]}
-                        position20 = {row[8]}
-                while (name == Team_name and name2 == Team_name):
+                while (name == Team_name):
                         print (year)
-                        if (year == "2014" ):
-                            position = position14
-                        elif (year == "2015"):
-                            position = position15
-                        elif (year == "2016"):
-                            position = position16
-                        elif (year == "2017"):
-                            position = position17
-                        elif (year == "2018"):
-                            position = position18
-                        elif (year == "2019"):
-                            position = position19
-                        elif (year == "2020"):
-                            position = position20
-                        print(f'\t{Team_name} in {year}, position {position}  ')
+                        print(f'\t{Team_name} in {year}, position   ')
                         if name == Team_name:
                             target0 = float(row[10])
                             target1 = target1 + target0
