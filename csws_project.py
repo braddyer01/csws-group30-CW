@@ -68,27 +68,36 @@ def page_one():
                 
                 window.mainloop()
             def parse_target(teamName):
+                key = 0
                 
                 with open("english premier league data.csv") as csv_file:
                     csv_reader = csv.reader(csv_file, delimiter=",")
                     lineCount = 0
                     counter = 0
-                    target0 = 0
+                    target = 0
                     target1 = 0
                     for row in csv_reader:
-                        
-                        while ({row[1]} or {row[2]} == teamName):
+                        while key == 0:
                             if ({row[1]} == teamName):
-                                target1 = row[11]
-                            elif({row[2]} == teamName):
-                                target1 = row[24]
-                            target0 = target0 + target1
-                            counter = counter + 1
-                            lineCount += 1
-                            break
-                        targetAverage = target0 / counter
-                print(f'\t{teamName}, position , {targetAverage}   ')
-                   
+                                target = target + int(row[11])
+                            elif ({row[2]} == teamName):
+                                target = target + int(row[11]) 
+                            else:
+                                key = 1
+                    print (target)
+                    print ({row[11]})
+                        #while ({row[1]} or {row[2]} == teamName):
+                         #   if ({row[1]} == teamName):
+                          #      target1 = row[11]
+                           # elif({row[2]} == teamName):
+                            #    target1 = row[24]
+                            #target0 = target0 + target1
+                            #counter = counter + 1
+                            #lineCount += 1
+                            #break
+                        #targetAverage = target0 / counter
+                #print(f'\t{teamName}, position , {targetAverage}   ')
+                    
                 
             main()
         elif (choice == "2"):
