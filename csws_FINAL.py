@@ -18,7 +18,9 @@ def page_one():
             menu()
         elif choice == "1":
             def main():
+                
                 window = Tk()
+                window.iconbitmap("favicon.ico")
                 window.title("EPL Data")
                 window.geometry("300x550")
                 window.configure(background = "black")
@@ -67,6 +69,9 @@ def page_one():
                 buttChel.pack()
                 
                 window.mainloop()
+
+                
+               
             def parse_target(teamName):
                 key = 0
                 
@@ -74,29 +79,62 @@ def page_one():
                     csv_reader = csv.reader(csv_file, delimiter=",")
                     lineCount = 0
                     counter = 0
-                    target = 0
+                    target0 = 0
                     target1 = 0
                     for row in csv_reader:
-                        while key == 0:
-                            if ({row[1]} == teamName):
-                                target = target + int(row[11])
-                            elif ({row[2]} == teamName):
-                                target = target + int(row[11]) 
-                            else:
-                                key = 1
-                    print (target)
-                    print ({row[11]})
-                        #while ({row[1]} or {row[2]} == teamName):
-                         #   if ({row[1]} == teamName):
-                          #      target1 = row[11]
-                           # elif({row[2]} == teamName):
-                            #    target1 = row[24]
-                            #target0 = target0 + target1
-                            #counter = counter + 1
-                            #lineCount += 1
-                            #break
-                        #targetAverage = target0 / counter
-                #print(f'\t{teamName}, position , {targetAverage}   ')
+
+                        if (teamName ==  "MAN CITY"):
+                            averagePosition = "1ST"
+                        elif (teamName ==  "TOTTENHAM"):
+                            averagePosition = "2ND"
+                        elif (teamName ==  "CHELSEA"):
+                            averagePosition = "3RD"
+                        elif (teamName ==  "LIVERPOOL"):
+                            averagePosition = "4TH"
+                        elif (teamName ==  "MAN UTD"):
+                            averagePosition = "5TH"
+                        elif (teamName ==  "ARSENAL"):
+                            averagePosition = "6TH"
+                        elif (teamName ==  "LEICESTER CITY"):
+                            averagePosition = "8TH"
+                        elif (teamName ==  "EVERTON"):
+                            averagePosition = "10TH"
+                        elif (teamName ==  "SOUTHAMPTON"):
+                            averagePosition = "11TH"
+                        elif (teamName ==  "WEST HAM"):
+                            averagePosition = "12TH"
+                        elif (teamName ==  "STOKE"):
+                            averagePosition = "13TH"
+                        elif (teamName ==  "SWANSEA"):
+                            averagePosition = "15TH"
+                        elif (teamName ==  "BURNLEY"):
+                            averagePosition = "16TH"
+                        elif (teamName ==  "NEWCASTLE"):
+                            averagePosition = "17TH"
+                        elif (teamName ==  "WEST BROM"):
+                            averagePosition = "18TH"
+                        elif (teamName ==  "SUNDERLAND"):
+                            averagePosition = "21ST"
+                        elif (teamName ==  "ASTON VILLA"):
+                            averagePosition = "22ND"
+                        elif (teamName ==  "HULL CITY"):
+                            averagePosition = "25TH"
+                        elif (teamName ==  "QPR"):
+                            averagePosition = "27TH"
+                        elif (teamName ==  "CRYSTAL PALACE"):
+                            averagePosition = "14TH"
+
+                        while (row[1] or row[2] == teamName):
+                            if (row[1] == teamName):
+                                target1 = float(row[11])
+                            elif(row[2] == teamName):
+                                target1 = float(row[24])
+                            target0 = target0 + target1
+                            counter = counter + 1
+                            lineCount += 1
+                            break
+                        targetAverage = target0 / counter
+                print(f'\t{teamName}s average position: {averagePosition} ,average on target shots {int(targetAverage)}   ')
                     
                 
             main()
@@ -154,6 +192,7 @@ def page_three():
             menu()
         elif choice == "1":
             def choice(derby1, derby2):
+                #window for data selection
                 window = Tk()
                 window.title("English Premier League")
                 window.geometry("250x250")
@@ -172,6 +211,7 @@ def page_three():
                 window.mainloop()
                 
             def main():
+                #window for team selection
                 window = Tk()
                 window.title("EPL Data")
                 window.geometry("300x300")
@@ -196,6 +236,8 @@ def page_three():
                 window.mainloop()
 
             def parse(derby1, derby2, choice1):
+                #parse derbies data
+                #initialise arrays and variables for data parsing
                 pos1 = []
                 pos2 = []
                 yellow1 = []
@@ -213,36 +255,37 @@ def page_three():
                     csv_reader = csv.reader(csv_file, delimiter=',')
                     line_count = 0
                     if choice1 == "Possession":
-                        for row in csv_reader:
-                            while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
-                                print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
+                        for row in csv_reader: #while csv still has unread lines
+                            while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2): #for all rows containing selected teams
+                                print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')#presents results of all teams in command line as extra info
                                 if row[1] == derby1:
-                                    pos1.append(row[8])
+                                    pos1.append(row[8])#adds possession stats to array which will later be averaged
                                     pos2.append(row[9])
                                 else:
                                     pos1.append(row[9])
                                     pos2.append(row[8])
 
-                                line_count += 1
+                                line_count += 1#counts number of lines processed
                                 break
                             
                         for i in range(len(pos1)):
                             total = total + int(pos1[i])
-                            total2 = total2 + int(pos2[i])
+                            total2 = total2 + int(pos2[i])#calculates average possession
                         avg = total / len(pos1)
                         avg2 = total2 / len(pos2)
                         avg = round(avg, 2)
                         avg2 = round(avg2, 2)
-                        pieVal = np.array([avg, avg2])
-                        labelList = [derby1 + "\n" + str(avg), derby2 + "\n" + str(avg2)]
+                        pieVal = np.array([avg, avg2])#adds values to pie chart data array
+                        labelList = [derby1 + "\n" + str(avg), derby2 + "\n" + str(avg2)]#prepares labels to be displayed on pie chart
                         print(derby1, "Average Possesion: ", avg)
                         print(derby2, "Average Possession", avg2)
                         print(f'Processed {line_count} lines.')
                         plt.title("Average Possession")
-                        plt.pie(pieVal, labels = labelList, shadow = True)
+                        plt.pie(pieVal, labels = labelList, shadow = True) #creates pie chart using data calculated earlier
                         plt.show()
 
                     if choice1 == "Goals":
+                        #same concept as first if
                         for row in csv_reader:
                             while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
                                 print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
@@ -273,17 +316,22 @@ def page_three():
                         plt.show()
 
                     if choice1 == "Cards":
+                        #same concept as previous 2 ifs
                         for row in csv_reader:
                             while (row[1] == derby1 or row[1] == derby2) and (row[2] == derby1 or row[2] == derby2):
                                 print(f'\t{row[1]} vs {row[2]} Score: {row[3]} Year: {row[40]}')
                                 if row[1] == derby1: 
-                                    yellow1.append(float(row[21]) + float(row[22]))
-                                    yellow2.append(float(row[34]) + float(row[35]))
+                                    numYellow1 = float(row[21]) + float(row[22])#totals calculated seperately because it didnt work the normal way for some reason
+                                    numYellow2 = float(row[34]) + float(row[35])
+                                    yellow1.append(numYellow1)
+                                    yellow2.append(numYellow2)
                                     red1.append(row[23])
                                     red2.append(row[36])
                                 else:
-                                    yellow2.append(row[21] + row[22])
-                                    yellow1.append(row[34] + row[35])
+                                    numYellow1 = float(row[21]) + float(row[22])
+                                    numYellow2 = float(row[34]) + float(row[35])
+                                    yellow2.append(numYellow1)
+                                    yellow1.append(numYellow2)
                                     red2.append(row[23])
                                     red1.append(row[36])
 
@@ -291,26 +339,26 @@ def page_three():
                                 break
                             
                         for i in range(len(yellow1)):
-                            totalYellow1 = totalYellow1 + int(yellow1[i])
-                            totalYellow2 = totalYellow2 + int(yellow2[i])
-                            totalRed1 = totalRed1 + int(red1[i])
-                            totalRed2 = totalRed2 + int(red2[i])
+                            totalYellow1 = totalYellow1 + float(yellow1[i])#calculates average number of red and yellow cards for selected derbies
+                            totalYellow2 = totalYellow2 + float(yellow2[i])
+                            totalRed1 = totalRed1 + float(red1[i])
+                            totalRed2 = totalRed2 + float(red2[i])
                         avgYellow1 = totalYellow1 / len(yellow1)
                         avgYellow2 = totalYellow2 / len(yellow2)
                         avgRed = totalRed1 / len(red1)
                         avgRed2 = totalRed2 / len(red2)
-                        avgYellow1 = round(avgYellow1, 2)
+                        avgYellow1 = round(avgYellow1, 2)#rounds average cards number to prevent long decimals
                         avgYellow2 = round(avgYellow2, 2)
                         avgRed = round(avgRed, 2)
                         avgRed = round(avgRed2, 2)
                         pieVal = np.array([avgYellow1, avgRed, avgYellow2, avgRed2])
-                        labelList = [derby1 + " Yellow Cards\n" + str(avgYellow1), derby1 + " Red Cards\n" + str(avgRed), derby2 + " Yellow Cards\n" + str(avgYellow2), derby2 + " Red Cards\n" + str(avgRed2)]
-                        print(derby1, "Average Yellow Cards: ", avgYellow1)
-                        print(derby2, "Average Yellow Cards:", avgYellow2)
-                        print(derby1, "Average Red Cards: ", avgRed)
-                        print(derby2, "Average Red Cards: ", avgRed2)
+                        labelList = [derby1 + " Red Cards\n" + str(avgYellow1), derby1 + " Yellow Cards\n" + str(avgRed), derby2 + " Red Cards\n" + str(avgYellow2), derby2 + " Yellow Cards\n" + str(avgRed2)]
+                        print(derby1, "Average Red Cards: ", avgYellow1)
+                        print(derby2, "Average Red Cards:", avgYellow2)
+                        print(derby1, "Average Yellow Cards: ", avgRed)
+                        print(derby2, "Average Yellow Cards: ", avgRed2)
                         print(f'Processed {line_count} lines.')
-                        plt.title("Average Goals")
+                        plt.title("Average Cards")
                         plt.pie(pieVal, labels = labelList, shadow = True)
                         plt.show()
 
