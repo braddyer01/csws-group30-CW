@@ -1,7 +1,9 @@
 #Imports csv library
 import csv
 from http.client import BAD_REQUEST
+from os import putenv
 import matplotlib.pyplot as plt
+import numpy as np
 from sqlalchemy import Integer
 plt.style.use('ggplot')
 
@@ -124,7 +126,7 @@ def csvimport():
             elif (data[2]) == "ASTON VILLA":
                 VILLA = VILLA + int(data[37])
                 
-            elif (data[2]) == "SOUTHHAMPTON":
+            elif (data[2]) == "SOUTHAMPTON":
                 SOUTHHAMPT = SOUTHHAMPT + int(data[37])
                 
             elif (data[2]) == "WEST HAM":
@@ -188,23 +190,20 @@ def csvimport():
 
 
 def matplot():
+    data = [[30, 25, 50, 20],
+    [40, 23, 51, 17],
+    [35, 22, 45, 19]]
+    X = np.arange(4)
+    fig = plt.figure()
+    ax = fig.add_axes([0,0,1,1])
+    ax.bar(X + 0.00, data[0], color = 'b', width = 0.25)
+    ax.bar(X + 0.25, data[1], color = 'g', width = 0.25)
+    ax.bar(X + 0.50, data[2], color = 'r', width = 0.25)
 
-    x = ['Man Utd', 'West Ham Utd', 'Chealsea', 'Manchester City', 'Liverpool']
-    energy = [48, 49, 57, 68, 75]
-
-    x_pos = [i for i, _ in enumerate(x)]
-
-    plt.bar(x_pos, energy, color='green')
-    plt.xlabel("Team")
-    plt.ylabel("Goals scored")
-    plt.title("Goals scored by top teams")
-
-    plt.xticks(x_pos, x)
-
-    plt.show()
-
+    
 #Defines the subroutine main
 def main():
+    
 
     #Creates a loop for the main menu
     loop = "0"
@@ -213,7 +212,7 @@ def main():
         #Accepts user input to choose from the menu options - Uses numbers so capitals dont matter - Could also use .Upper() function
         userChoice = input("------Menu------\n\n1. Read csv file\n\n2. Exit\n\n")
         if userChoice == "1":
-            csvimport()
+            matplot()
             print("\n\nSelect another option: \n")
         elif userChoice == "2":
             print("Quitting...")
