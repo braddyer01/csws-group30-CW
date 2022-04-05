@@ -1,9 +1,14 @@
-#Imports csv library
+#Imports libararies needed
 import csv
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-from tkinter import *
 
+font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 6}
+
+matplotlib.rc('font', **font)
 
 #Defines the subroutine csvimport
 def csvimport():
@@ -13,7 +18,10 @@ def csvimport():
     #Opens the csv file and creates a reader that puts the lines into a list variable
     with open('english premier league data.csv', 'r') as csvfile:
         
+        
         lines = csvfile.readlines()
+
+        #Creates all variables needed for the program 
         goals = []
         titles = [20,6,7,13,19,2,1,9,7,0,0,4,3,0,0,0,3,0,2,0]
         MANUTD = 0
@@ -164,26 +172,26 @@ def csvimport():
 
 
         
-    goals.append(MANUTD)
-    goals.append(CHEAL)
-    goals.append(MANCIT)
-    goals.append(ARSENAL)
-    goals.append(LIVERPOOL)
-    goals.append(SPURS)
-    goals.append(LEISTER)
-    goals.append(EVERTON)
-    goals.append(VILLA)
-    goals.append(SOUTHHAMPT)
-    goals.append(WESTHAM)
-    goals.append(NEWCASTLE)
-    goals.append(WOLVES)
-    goals.append(WATFORD)
-    goals.append(CRYSTAL)
-    goals.append(NORWICH)
-    goals.append(LEEDS)
-    goals.append(BRIGHTON)
-    goals.append(BURNLEY)
-    goals.append(WESTBROM)
+    goals.append(MANUTD/50)
+    goals.append(CHEAL/50)
+    goals.append(MANCIT/50)
+    goals.append(ARSENAL/50)
+    goals.append(LIVERPOOL/50)
+    goals.append(SPURS/50)
+    goals.append(LEISTER/50)
+    goals.append(EVERTON/50)
+    goals.append(VILLA/50)
+    goals.append(SOUTHHAMPT/50)
+    goals.append(WESTHAM/50)
+    goals.append(NEWCASTLE/50)
+    goals.append(WOLVES/50)
+    goals.append(WATFORD/50)
+    goals.append(CRYSTAL/50)
+    goals.append(NORWICH/50)
+    goals.append(LEEDS/50)
+    goals.append(BRIGHTON/50)
+    goals.append(BURNLEY/50)
+    goals.append(WESTBROM/50)
 
     #Prints list of csv cells
     
@@ -196,9 +204,11 @@ def csvimport():
         
     plt.bar(x-0.2, y1, width)
     plt.bar(x+0.2, y2, width)
-    plt.xticks(x, ['MAN UTD', 'CHELSEA', 'MAN CITY', 'ARSENAL', 'LPOOL', 'SPURS', 'LEICESTER', 'EVERTON', 'ASTON VILLA', 'SOUTHAMPTON', 'WEST HAM', 'NEWCASTLE', 'WOLVES', 'WATFORD', 'CRYSTAL PALACE', 'NORWICH', 'LEEDS', 'BRIGHTON', 'BURNLEY', 'BRENTFORD'])
+    plt.xticks(x, ['MAN UTD', 'CHELSEA', 'MAN CITY', 'ARSENAL', 'LPOOL', 'SPURS', 'LEICESTER', 'EVERTON', 'ASTON VILLA', 'SHAMPTON', 'WEST HAM', 'NEWCASTLE', 'WOLVES', 'WATFORD', 'CRYSTAL PALACE', 'NORWICH', 'LEEDS', 'BRIGHTON', 'BURNLEY', 'BRENTFORD'])
     plt.xlabel("Teams (In order of popularity)")
-    plt.ylabel("Goals Scored (Blue) Titles Won (Orange)")
+    plt.ylabel("Goals Scored in multiples of 50 (Blue) Titles Won (Orange)")
+    
+
 
     plt.show()
 
