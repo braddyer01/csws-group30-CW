@@ -1,1 +1,3 @@
-my new file
+My visualisations rely on the tkinter, matplotlib and numPy libraries so they must be run in a python environment with said libraries installed.
+Upon running the program, data will be presented to the user in both GUI and command line formats after a visualisation is selected.
+Also ensure that the "english premier league data.csv" and "favicon.ico" files are within the scope of the program; this should not be a problem if the program is run through a cloned github repository.
