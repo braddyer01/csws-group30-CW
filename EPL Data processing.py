@@ -28,20 +28,33 @@ def main(teamName1, teamName2, statChoice):
         lineCount = 0
         if statChoice == "SHOTS":
             for row in csvReader:
-                while (row[1] == teamName1 or row[1] == teamName2) and (row[2] == teamName1 or row[2] == teamName2):
-                    if row[1] == teamName1:
-                        shot1.append(row[12])
-                        shot2.append(row[25])
-                    else:
-                        shot1.append(row[25])
-                        shot2.append(row[12])
-                print (shot1)
-                print (shot2)
-                break
+                if lineCount == 0:
+                    lineCount += 1
+                else:
+                    while (row[1] == teamName1 or row[2] == teamName1):
+                        if row[1] == teamName1:
+                            shot1.append(row[12])
+                            break
+                        else:
+                            shot1.append(row[25])
+                            break
+                    while (row[1] == teamName2 or row[2] == teamName2):
+                        if row[1] == teamName2:
+                            shot2.append(row[12])
+                            break
+                        else:
+                            shot2.append(row[25])
+                            break
+            print (shot1)
+            print (shot2)
+            lineCount += 1
+
+                    
                         
             for i in range(len(shot1)):
-                totalShot1 = totalShot1 + int(shot1[i])
-                totalShot2 = totalShot2 + int(shot2[i])
+                totalShot1 = totalShot1 + float(shot1[i])
+            for i in range(len(shot2)):
+                totalShot2 = totalShot2 + float(shot2[i])
             avg = totalShot1 / len(shot1)
             avg2 = totalShot2 / len(shot2)
             avg = round(avg, 2)
