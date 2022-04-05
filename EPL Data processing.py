@@ -64,7 +64,7 @@ def main(teamName1, teamName2, statChoice):
             plt.bar(y_pos, objects2, align="center", alpha =0.5)
             plt.xticks(y_pos,objects1)
             plt.ylabel("AVG Shots")
-            plt.title("Teams Average Shots")
+            plt.title("Teams Average Shots per game")
 
             plt.show()
 
