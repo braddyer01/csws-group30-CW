@@ -114,6 +114,7 @@ def displayData(chosenTeam):
     HomeScoreFTLabel.pack()
     HomeScoreHTLabel.pack()
 
+    plt.rcParams['font.size'] = '6'
     plt.bar([chosenTeam +" Average HT Goals", chosenTeam+" Average FT Goals", "League Average HT Goals", "League Average FT Goals"],[(averageHTHGoals+averageHTAGoals)/2,(averageFTAGoals+averageFTHGoals/2),0.5,0.98])
     plt.show()
 
