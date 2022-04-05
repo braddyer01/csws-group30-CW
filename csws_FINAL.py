@@ -1,6 +1,7 @@
 #imports---------------------------------------------------------------------------------------------------------
 from tkinter import *
 import csv
+from unicodedata import decimal
 import numpy as np
 import matplotlib.pyplot as plt
 #page one--------------------------------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ def page_one():
                 window = Tk()
                 window.iconbitmap("favicon.ico")
                 window.title("EPL Data")
-                window.geometry("300x550")
+                window.geometry("300x600")
                 window.configure(background = "black")
                 labl = Label(window, text = "", fg = "white", bg = "black")
                 buttManutd = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse_target("MAN UTD"))
@@ -45,8 +46,10 @@ def page_one():
                 buttMancity = Button(window, text = "MAN CITY", bg = "white", command = lambda: parse_target( "MAN CITY"))
                 buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target("BURNLEY"))
                 buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target("CHELSEA"))
-                
+                buttVisual = Button(window, text = "VISUALISATION", bg = "white", command = lambda: parse_target(""))
+
                 labl.pack()
+                buttVisual.pack()
                 buttManutd.pack()
                 buttSwan.pack()
                 buttBrom.pack()
@@ -67,97 +70,92 @@ def page_one():
                 buttMancity.pack()
                 buttBurn.pack()
                 buttChel.pack()
-                
                 window.mainloop()
 
                 
-               
+
             def parse_target(teamName):
                 key = 0
+                teamNameList = ["MAN CITY","TOTTENHAM", "CHELSEA","LIVERPOOL", "MAN UTD", "ARSENAL", "LEICESTER","EVERTON", "SOUTHAMPTON", "WEST HAM","STOKE", "SWANSEA", "BURNLEY","NEWCASTLE", "WEST BROM", "SUNDERLAND", "ASTON VILLA", "HULL CITY", "QPR", "CRYSTAL PALACE"]
                 
                 with open("english premier league data.csv") as csv_file:
-                    csv_reader = csv.reader(csv_file, delimiter=",")
-                    lineCount = 0
+                    csvReader = csv.reader(csv_file, delimiter=",")
+                    exciteAverage = 0
                     counter = 0
-                    target0 = 0
-                    target1 = 0
-                    for row in csv_reader:
+                    excite0 = 0
+                    excite1 = 0
+                    
+                                
+                        
 
-                        if (teamName ==  "MAN CITY"):
-                            averagePosition = "1ST"
+                    for row in csvReader:
+                        if (teamName == ""):
+                            averagePosition = 0
+                        elif (teamName ==  "MAN CITY"):
+                            averagePosition = 1
                         elif (teamName ==  "TOTTENHAM"):
-                            averagePosition = "2ND"
+                            averagePosition = 2
                         elif (teamName ==  "CHELSEA"):
-                            averagePosition = "3RD"
+                            averagePosition = 3
                         elif (teamName ==  "LIVERPOOL"):
-                            averagePosition = "4TH"
+                            averagePosition = 4
                         elif (teamName ==  "MAN UTD"):
-                            averagePosition = "5TH"
+                            averagePosition = 5
                         elif (teamName ==  "ARSENAL"):
-                            averagePosition = "6TH"
+                            averagePosition = 6
                         elif (teamName ==  "LEICESTER CITY"):
-                            averagePosition = "8TH"
+                            averagePosition = 8
                         elif (teamName ==  "EVERTON"):
-                            averagePosition = "10TH"
+                            averagePosition = 10
                         elif (teamName ==  "SOUTHAMPTON"):
-                            averagePosition = "11TH"
+                            averagePosition = 11
                         elif (teamName ==  "WEST HAM"):
-                            averagePosition = "12TH"
+                            averagePosition = 12
                         elif (teamName ==  "STOKE"):
-                            averagePosition = "13TH"
+                            averagePosition = 13
                         elif (teamName ==  "SWANSEA"):
-                            averagePosition = "15TH"
+                            averagePosition = 15
                         elif (teamName ==  "BURNLEY"):
-                            averagePosition = "16TH"
+                            averagePosition = 16
                         elif (teamName ==  "NEWCASTLE"):
-                            averagePosition = "17TH"
+                            averagePosition = 17
                         elif (teamName ==  "WEST BROM"):
-                            averagePosition = "18TH"
+                            averagePosition = 18
                         elif (teamName ==  "SUNDERLAND"):
-                            averagePosition = "21ST"
+                            averagePosition = 21
                         elif (teamName ==  "ASTON VILLA"):
-                            averagePosition = "22ND"
+                            averagePosition = 22
                         elif (teamName ==  "HULL CITY"):
-                            averagePosition = "25TH"
+                            averagePosition = 25
                         elif (teamName ==  "QPR"):
-                            averagePosition = "27TH"
+                            averagePosition = 27
                         elif (teamName ==  "CRYSTAL PALACE"):
-                            averagePosition = "14TH"
+                            averagePosition = 14
+                        n= []
 
                         while (row[1] or row[2] == teamName):
-                            if (row[1] == teamName):
-                                target1 = float(row[11])
-                            elif(row[2] == teamName):
-                                target1 = float(row[24])
-                            target0 = target0 + target1
+                            excite0 = float(row[5])
+                            ecite1 = excite1 + excite0
                             counter = counter + 1
-                            lineCount += 1
-                            break
-                        targetAverage = target0 / counter
-                print(f'\t{teamName}s average position: {averagePosition} ,average on target shots {int(targetAverage)}   ')
+                        exciteAverage = excite1 / counter
+                        
+
+
+                if (averagePosition > 0):
+                    posString = f"s average position: {averagePosition} ,"
+                else:
+                    posString = "Overall"
+
+                print(f'{teamName}{posString} average match excitement: {int(exciteAverage)}   ')
+                
                     
                 
+
             main()
-        elif (choice == "2"):
-            plt.figure(figsize=(8, 5), dpi=80)
-            plt.subplot(111)
+        
+                
+                
 
-            X = np.linspace(-np.pi, np.pi, 256)
-            C = np.cos(X)
-            S = np.sin(X)
-
-            plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-")
-            plt.plot(X, S, color="red", linewidth=2.5, linestyle="-")
-
-            plt.xlim(X.min() * 1.1, X.max() * 1.1)
-            plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
-                    [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
-
-            plt.ylim(C.min() * 1.1, C.max() * 1.1)
-            plt.yticks([-1, 0, +1],
-                    [r'$-1$', r'$0$', r'$+1$'])
-
-            plt.show()
         
         else:
             print ("Invalid input")
@@ -385,10 +383,11 @@ def page_four():
             print ("Invalid input")
 #page five------------------------------------------------------------------------------------------------------
 def page_five():
+    
     key = 0
     print ("""-------------------PAGE5-------------------
     1) View Data
-    0)EXIT
+    0) EXIT
 """)
     while key == 0:
         choice = input("""Please choose a page option: """)
@@ -396,7 +395,143 @@ def page_five():
             key = 1
             menu()
         elif choice == "1":
-            print(".")
+            Teams1 = ['Man City', 'Liverpool', 'Chelsea', 'Tottenham', 'Arsenal', 'Man United', 'Wolves', 'Everton', 'Leicester', 'West Ham', 'Watford', 'Crystal Palace', 'Newcastle', 'Bournemouth', 'Burnley', 'Southampton', 'Brighton', 'Cardiff City', 'Fulham', 'Huddersfield']
+            Points1 = [98, 97, 72, 71, 70, 66, 57, 54, 52, 52, 50, 49, 45, 45, 40, 39, 36, 34, 26, 16]
+
+            Teams2 = ['Liverpool', 'Man City', 'Man United', 'Chelsea', 'Leicester', 'Tottenham', 'Wolves', 'Arsenal', 'Sheffield', 'Burnley', 'Southampton', 'Everton', 'Newcastle', 'Crystal Palace', 'Brighton', 'West Ham', 'Aston Villa', 'Bournemouth', 'Watford', 'Norwich City']
+            Points2 = [99, 81, 66, 66, 62, 59, 59, 56, 54, 54, 52, 49, 44, 43, 41, 39, 35, 34, 34, 21]
+
+            Teams3 = ['Man City', 'Man United', 'Liverpool', 'Chelsea', 'Leicester', 'West Ham', 'Tottenham', 'Arsenal', 'Leeds', 'Everton', 'Aston Villa', 'Newcastle', 'Wolves', 'Crystal Palace', 'Southampton', 'Brighton', 'Burnley', 'Fulham', 'West Brom', 'Sheffield']
+            Points3 = [86, 74, 69, 67, 66, 65, 62, 61, 59, 59, 55, 45, 45, 44, 43, 41, 39, 28, 26, 23]
+            #Declaring all of the teams and the points that they recieved in that season
+
+            def choose():
+                print("Please choose what season you would like to view:")
+                print("[1] 2018/19")
+                print("[2] 2019/20")
+                print("[3] 2020/21")
+                # Text based menu that allows the user to choose what season they would like to view
+
+
+            choose()
+            option1 = int(input("Please enter your option: "))
+
+            while option1 != 0:
+                if option1 == 1:
+                    print("Premier League Table 2018/19")
+                    print("Please choose what type of data visualisation you would like to see:")
+                    print("[1] Bar Chart")
+                    print("[2] Pie Chart")
+                    print("[0] Exit the program.")
+                    # Text based menu thats allows the user to choose what type of visualisation they would like to view
+
+
+                    option2 = int(input("Please enter your option: "))
+
+                    while option2 != 0:
+                        if option2 == 1:
+                        # This option will display a visualisation of a bar chart
+                            plt.bar(Teams1, Points1)
+                            plt.title('Premier League Table 2018/19 Season')
+                            plt.xlabel('Teams')
+                            plt.ylabel('Points')
+                            plt.show()  
+                            plt.show(block=False)
+                            plt.close('all')                           
+
+                        elif option2 == 2:
+                        # This option will display a visualisation of a pie chart which displays the distribution of all points added up in the premier league table
+                            fig1 = plt.figure()
+                            ax1 = fig1.add_axes([0,0,1,1])
+                            ax1.axis('equal')
+                            ax1.pie(Points1, labels1 = Teams1,autopct='%.2f%%')
+                            plt.show()
+                        else:
+                            print("Invalid option, please try again.")
+
+                    print()    
+                    option2 = int(input("Please enter your option: "))
+                    plt.close(all)
+
+                elif option1 == 2:
+
+                    print("Premier League Table 2019/20")
+                    print("Please choose what type of data visualisation you would like to see:")
+                    print("[1] Bar Chart")
+                    print("[2] Pie Chart")
+                    print("[0] Exit the program.")
+                    # Text based menu thats allows the user to input an option
+
+
+                    option3 = int(input("Please enter your option: "))
+
+                    while option3 != 0:
+                        if option3 == 1:
+                        # This option will display a visualisation of a bar chart
+                            plt.bar(Teams2, Points2)
+                            plt.title('Premier League Table 2019/20 Season')
+                            plt.xlabel('Teams')
+                            plt.ylabel('Points')
+                            plt.show()
+
+                        elif option3 == 2:
+                        # his option will display a visualisation of a pie chart which displays the distribution of all points in the premier league table
+                            fig2 = plt.figure()
+                            ax2 = fig2.add_axes([0,0,1,1])
+                            ax2.axis('equal')
+                            ax2.pie(Points2, labels2 = Teams2,autopct='%.2f%%')
+                            plt.show()
+                        else:
+                            print("Invalid option, please try again.")
+
+                    print()        
+                    option3 = int(input("Please enter your option: "))
+
+                elif option1 == 3:
+                    print("Premier League Table 2020/21")
+                    print("Please choose what type of data visualisation you would like to see:")
+                    print("[1] Bar Chart")
+                    print("[2] Pie Chart")
+                    print("[0] Exit the program.")
+                    # Text based menu thats allows the user to input an option
+
+
+                    option4 = int(input("Please enter your option: "))
+
+                    while option4 != 0:
+                        if option4 == 1:
+                        # This option will display a visualisation of a bar chart
+                            plt.bar(Teams3, Points3)
+                            plt.title('Premier League Table 2020/21 Season')
+                            plt.xlabel('Teams')
+                            plt.ylabel('Points')
+                            plt.show()
+
+                        elif option4 == 2:
+                        # This option will display a visualisation of a pie chart which displays the distribution of all points in the premier league table
+                            fig3 = plt.figure()
+                            ax3 = fig3.add_axes([0,0,1,1])
+                            ax3.axis('equal')
+                            ax3.pie(Points3, labels3 = Teams3,autopct='%.2f%%')
+                            plt.show()
+                        else:
+                            print("Invalid option, please try again.")
+
+                    print()        
+                    option4 = int(input("Please enter your option: "))
+
+                else:
+                    print("Invalid option, please try again.")
+                    # While loop if none of the requested input is given
+
+                print()
+                choose()
+                option1 = int(input("Please enter your option: "))
+
+
+
+
+            plt.close('all')
         else:
             print ("Invalid input")
 #page six------------------------------------------------------------------------------------------------------
@@ -425,9 +560,9 @@ def page_six():
 #main menu-------------------------------------------------------------------------------------------------------    
 def menu():
     print ("""-------------------MENU-------------------
-    1) Target Shots vs Position
+    1) Excitement vs League Position
     2) Top vs Bttom League Comparison
-    3) Rivals VS Average
+    3) Derby Stats
     4) Half Time VS End
     5) Points Per Season
     6) Popularity vs Result
