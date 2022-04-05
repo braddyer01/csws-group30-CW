@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 def page_one():
     key = 0
     exciteArray = []
-    
     print ("""-------------------PAGE1-------------------
     1) View Data
     2) Visualisation
@@ -22,12 +21,13 @@ def page_one():
             menu()
         elif choice == "1":
             def main():
-                
+                #creates tkinter window
                 window = Tk()
                 window.iconbitmap("favicon.ico")
                 window.title("EPL Data")
                 window.geometry("300x600")
                 window.configure(background = "black")
+                #defines buttons
                 labl = Label(window, text = "", fg = "white", bg = "black")
                 buttManutd = Button(window, text = "MAN UTD", bg = "white", command = lambda: parse_target("MAN UTD"))
                 buttSwan = Button(window, text = "SWANSEA", bg = "white", command = lambda: parse_target("SWANSEA"))
@@ -50,7 +50,7 @@ def page_one():
                 buttBurn = Button(window, text = "BURNLEY", bg = "white", command = lambda: parse_target("BURNLEY"))
                 buttChel = Button(window, text = "CHELSEA", bg = "white", command = lambda: parse_target("CHELSEA"))
                 buttVisual = Button(window, text = "VISUALISATION", bg = "white", command = lambda: parse_target(""))
-
+                #applies buttons to window
                 labl.pack()
                 buttVisual.pack()
                 buttManutd.pack()
@@ -76,7 +76,7 @@ def page_one():
                 window.mainloop()
 
                 
-
+            finds the information for the relevant team
             def parse_target(teamName):
                 totalExcite = 0
                 averageExcite = 0
@@ -87,6 +87,7 @@ def page_one():
                     counter = 0
                     lineCount = 0
                     for row in csvReader:
+                        #declares the league position of each team
                         if (teamName == ""):
                             averagePosition = 0
                         elif (teamName ==  "MAN CITY"):
@@ -129,13 +130,13 @@ def page_one():
                             averagePosition = 27
                         elif (teamName ==  "CRYSTAL PALACE"):
                             averagePosition = 14
-
+                        #stops from reading titles instead of data
                         if lineCount == 0:
                             lineCount += 1
                         else:
                             counter = 0
                             totalExcite = 0
-                            
+                            #works out average "excitement" for chosen team   
                             while (row[1] or row[2] == teamName):
                                 if row[1] or row[2] == teamName:
                                     exciteArray.append(row[5])
@@ -172,11 +173,11 @@ def page_one():
                 
         elif (choice == "2"):
             lineCount = 0
-            v1 = 0
-            v2 = 0
-            with open("english premier league data.csv") as csv_file:
-                    csvReader = csv.reader(csv_file, delimiter=",")
-                    #for row csv.reader
+            teams = ["MC","TT","LP","MU","AR","LC","EV","SH","WH","SK","CP","SS","NC","WB","SL","AV","HC","QPR"
+            data = [1,2 3,4 5,6 8,10,11,12,13,14,15,16,17,18,21,22,25,27]
+            plt.title("league positions in order of attendance
+            plt.bar(teams, data)
+            plt.show()
                              
                     
                     
