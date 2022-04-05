@@ -80,73 +80,143 @@ def page_one():
                 
                 with open("english premier league data.csv") as csv_file:
                     csvReader = csv.reader(csv_file, delimiter=",")
-                    exciteAverage = 0
-                    counter = 0
-                    excite0 = 0
-                    excite1 = 0
+                    next(csvReader)
+                    exciteCount = 0.00
+                    excite = 0.00
                     
                                 
                         
 
                     for row in csvReader:
-                        if (teamName == ""):
-                            averagePosition = 0
-                        elif (teamName ==  "MAN CITY"):
+                        
+                        if (teamName ==  "MAN CITY"):
+                            if row[5] == "Match Excitement":
+                                pass
+                            elif type(row[5]) == str:
+                                pass
                             averagePosition = 1
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "TOTTENHAM"):
                             averagePosition = 2
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "CHELSEA"):
                             averagePosition = 3
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "LIVERPOOL"):
                             averagePosition = 4
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "MAN UTD"):
                             averagePosition = 5
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "ARSENAL"):
                             averagePosition = 6
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "LEICESTER CITY"):
                             averagePosition = 8
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "EVERTON"):
                             averagePosition = 10
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "SOUTHAMPTON"):
                             averagePosition = 11
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "WEST HAM"):
                             averagePosition = 12
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "STOKE"):
                             averagePosition = 13
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "SWANSEA"):
                             averagePosition = 15
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "BURNLEY"):
                             averagePosition = 16
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "NEWCASTLE"):
                             averagePosition = 17
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "WEST BROM"):
                             averagePosition = 18
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "SUNDERLAND"):
                             averagePosition = 21
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "ASTON VILLA"):
                             averagePosition = 22
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "HULL CITY"):
                             averagePosition = 25
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "QPR"):
                             averagePosition = 27
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         elif (teamName ==  "CRYSTAL PALACE"):
                             averagePosition = 14
+                            if row[5] == "Match Excitement":
+                                pass
+                            exciteCount = exciteCount + 1
+                            excite = excite + float(row[5])
                         n= []
 
-                        while (row[1] or row[2] == teamName):
-                            excite0 = float(row[5])
-                            ecite1 = excite1 + excite0
-                            counter = counter + 1
-                        exciteAverage = excite1 / counter
+                    print ("Average excitement: " + str(excite/exciteCount))
                         
 
 
-                if (averagePosition > 0):
-                    posString = f"s average position: {averagePosition} ,"
-                else:
-                    posString = "Overall"
-
-                print(f'{teamName}{posString} average match excitement: {int(exciteAverage)}   ')
                 
                     
                 
