@@ -51,7 +51,7 @@ while option1 != 0:
                 fig1 = plt.figure()
                 ax1 = fig1.add_axes([0,0,1,1])
                 ax1.axis('equal')
-                ax1.pie(Points1, labels1 = Teams1,autopct='%.2f%%')
+                ax1.pie(Points1, labels = Teams1,autopct='%.2f%%')
                 plt.show()
             else:
                 print("Invalid option, please try again.")
@@ -86,7 +86,7 @@ while option1 != 0:
                 fig2 = plt.figure()
                 ax2 = fig2.add_axes([0,0,1,1])
                 ax2.axis('equal')
-                ax2.pie(Points2, labels2 = Teams2,autopct='%.2f%%')
+                ax2.pie(Points2, labels = Teams2,autopct='%.2f%%')
                 plt.show()
             else:
                 print("Invalid option, please try again.")
@@ -119,7 +119,7 @@ while option1 != 0:
                 fig3 = plt.figure()
                 ax3 = fig3.add_axes([0,0,1,1])
                 ax3.axis('equal')
-                ax3.pie(Points3, labels3 = Teams3,autopct='%.2f%%')
+                ax3.pie(Points3, labels = Teams3,autopct='%.2f%%')
                 plt.show()
             else:
                 print("Invalid option, please try again.")
@@ -141,6 +141,5 @@ while option1 != 0:
 print("Thank you, goodbye.")
 plt.close('all')
 # Closes any remaining figures open
-
 
 
