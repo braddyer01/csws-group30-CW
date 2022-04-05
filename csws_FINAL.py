@@ -176,7 +176,7 @@ def page_one():
             v2 = 0
             with open("english premier league data.csv") as csv_file:
                     csvReader = csv.reader(csv_file, delimiter=",")
-                    for row csv.reader
+                    #for row csv.reader
                              
                     
                     
