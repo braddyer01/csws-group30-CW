@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pylab as plt
 
 def main(teamName1, teamName2, statChoice):
-    print(teamName1, " + ", teamName2, " + ", statChoice)
 
     shot1 = []
     shot2 = []
@@ -12,16 +11,16 @@ def main(teamName1, teamName2, statChoice):
     SOT2 = []
     Poss1 = []
     Poss2 = []
-    Cards1 = []
-    Cards2 = []
+    Fouls1 = []
+    Fouls2 = []
     totalShot1 = 0
     totalShot2 = 0
     totalPoss1 = 0
     totalPoss2 = 0
     totalSOT1 = 0
     totalSOT2 = 0
-    totalCards1 = 0
-    totalCards2 = 0
+    totalFouls1 = 0
+    totalFouls2 = 0
 
     with open ("english premier league data.csv") as csv_file:
         csvReader = csv.reader(csv_file, delimiter = ",")
@@ -45,12 +44,8 @@ def main(teamName1, teamName2, statChoice):
                         else:
                             shot2.append(row[25])
                             break
-            print (shot1)
-            print (shot2)
             lineCount += 1
 
-                    
-                        
             for i in range(len(shot1)):
                 totalShot1 = totalShot1 + float(shot1[i])
             for i in range(len(shot2)):
@@ -59,8 +54,8 @@ def main(teamName1, teamName2, statChoice):
             avg2 = totalShot2 / len(shot2)
             avg = round(avg, 2)
             avg2 = round(avg2, 2)
-            print (avg," + ", avg2)
-
+            print (teamName1, "averaged", avg, "shots per game")
+            print (teamName2, "averaged", avg2, "shots per game")
 
             objects1 = (teamName1, teamName2)
             y_pos = np.arange(len(objects1))
@@ -73,6 +68,134 @@ def main(teamName1, teamName2, statChoice):
 
             plt.show()
 
+        elif statChoice == "SHOTS ON TARGET":
+            for row in csvReader:
+                if lineCount == 0:
+                    lineCount += 1
+                else:
+                    while (row[1] == teamName1 or row[2] == teamName1):
+                        if row[1] == teamName1:
+                            SOT1.append(row[11])
+                            break
+                        else:
+                            SOT1.append(row[25])
+                            break
+                    while (row[1] == teamName2 or row[2] == teamName2):
+                        if row[1] == teamName2:
+                            SOT2.append(row[11])
+                            break
+                        else:
+                            SOT2.append(row[24])
+                            break
+            lineCount += 1
+
+            for i in range(len(SOT1)):
+                totalSOT1 = totalSOT1 + float(SOT1[i])
+            for i in range(len(SOT2)):
+                totalSOT2 = totalSOT2 + float(SOT2[i])
+            avg = totalSOT1 / len(SOT1)
+            avg2 = totalSOT2 / len(SOT2)
+            avg = round(avg, 2)
+            avg2 = round(avg2, 2)
+            print (teamName1, "averaged", avg, "shots on target per game")
+            print (teamName2, "averaged", avg2, "shots on target per game")
+
+            objects1 = (teamName1, teamName2)
+            y_pos = np.arange(len(objects1))
+            objects2 = [avg, avg2]
+
+            plt.bar(y_pos, objects2, align="center", alpha =0.5)
+            plt.xticks(y_pos,objects1)
+            plt.ylabel("AVG Shots on Target")
+            plt.title("Teams Average Shots on Target")
+
+            plt.show()
+
+        elif statChoice == "POSSESSION":
+            for row in csvReader:
+                if lineCount == 0:
+                    lineCount += 1
+                else:
+                    while (row[1] == teamName1 or row[2] == teamName1):
+                        if row[1] == teamName1:
+                            Poss1.append(row[8])
+                            break
+                        else:
+                            Poss1.append(row[9])
+                            break
+                    while (row[1] == teamName2 or row[2] == teamName2):
+                        if row[1] == teamName2:
+                            Poss2.append(row[8])
+                            break
+                        else:
+                            Poss2.append(row[9])
+                            break
+            lineCount += 1
+
+            for i in range(len(Poss1)):
+                totalPoss1 = totalPoss1 + float(Poss1[i])
+            for i in range(len(Poss2)):
+                totalPoss2 = totalPoss2 + float(Poss2[i])
+            avg = totalPoss1 / len(Poss1)
+            avg2 = totalPoss2 / len(Poss2)
+            avg = round(avg, 2)
+            avg2 = round(avg2, 2)
+            print (teamName1, "averaged", avg, "% posession")
+            print (teamName2, "averaged", avg2, "% possession")
+
+            objects1 = (teamName1, teamName2)
+            y_pos = np.arange(len(objects1))
+            objects2 = [avg, avg2]
+
+            plt.bar(y_pos, objects2, align="center", alpha =0.5)
+            plt.xticks(y_pos,objects1)
+            plt.ylabel("AVG Possession")
+            plt.title("Teams Average Possession per game")
+
+            plt.show()
+
+        elif statChoice == "FOULS":
+            for row in csvReader:
+                if lineCount == 0:
+                    lineCount += 1
+                else:
+                    while (row[1] == teamName1 or row[2] == teamName1):
+                        if row[1] == teamName1:
+                            Fouls1.append(row[19])
+                            break
+                        else:
+                            Fouls1.append(row[32])
+                            break
+                    while (row[1] == teamName2 or row[2] == teamName2):
+                        if row[1] == teamName2:
+                            Fouls2.append(row[19])
+                            break
+                        else:
+                            Fouls2.append(row[32])
+                            break
+            lineCount += 1
+
+            for i in range(len(Fouls1)):
+                totalFouls1 = totalFouls1 + float(Fouls1[i])
+            for i in range(len(Fouls2)):
+                totalFouls2 = totalFouls2 + float(Fouls2[i])
+            avg = totalFouls1 / len(Fouls1)
+            avg2 = totalPoss2 / len(Fouls2)
+            avg = round(avg, 2)
+            avg2 = round(avg2, 2)
+            print (teamName1, "averaged", avg, "fouls per game")
+            print (teamName2, "averaged", avg2, "fouls per game")
+
+            objects1 = (teamName1, teamName2)
+            y_pos = np.arange(len(objects1))
+            objects2 = [avg, avg2]
+
+            plt.bar(y_pos, objects2, align="center", alpha =0.5)
+            plt.xticks(y_pos,objects1)
+            plt.ylabel("AVG Fouls")
+            plt.title("Teams Average fouls per game")
+
+            plt.show()
                     
 
 
@@ -85,13 +208,13 @@ def choice(teamName1, teamName2):
     butShot =  Button(window, text = "Shots", bg = "white", command = lambda: main(teamName1, teamName2, "SHOTS"))
     butSOT =  Button(window, text = "Shots on Target", bg = "white", command = lambda: main(teamName1, teamName2, "SHOTS ON TARGET"))
     butPoss =  Button(window, text = "AVG Posession", bg = "white", command = lambda: main(teamName1, teamName2, "POSSESSION"))
-    butCards = Button(window, text = "AVG Cards", bg = "white", command = lambda: main(teamName1, teamName2, "CARDS"))
+    butFouls = Button(window, text = "AVG Fouls", bg = "white", command = lambda: main(teamName1, teamName2, "FOULS"))
 
     lab.pack()
     butShot.pack()
     butSOT.pack()
     butPoss.pack()
-    butCards.pack()
+    butFouls.pack()
 
     window.mainloop()
 
