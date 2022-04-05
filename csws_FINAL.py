@@ -176,17 +176,7 @@ def page_one():
             v2 = 0
             with open("english premier league data.csv") as csv_file:
                     csvReader = csv.reader(csv_file, delimiter=",")
-                    teamName = "MAN CITY"
-                    for row in csvReader:
-                        if (lineCount == 0):
-                            lineCount += 1
-                        else:
-                            while (row[1] or row[2] == teamName):
-                                v1 = float(row[5])
-                                v2 = v1 + v2
-                                
-                                lineCount += 1
-                                break
+                    for row csv.reader
                              
                     
                     
@@ -712,15 +702,17 @@ def page_three():
                         avgYellow2 = round(avgYellow2, 2)
                         avgRed = round(avgRed, 2)
                         avgRed = round(avgRed2, 2)
-                        pieVal = np.array([avgYellow1, avgRed, avgYellow2, avgRed2])
-                        labelList = [derby1 + " Red Cards\n" + str(avgYellow1), derby1 + " Yellow Cards\n" + str(avgRed), derby2 + " Red Cards\n" + str(avgYellow2), derby2 + " Yellow Cards\n" + str(avgRed2)]
+                        barVal = np.array([avgRed, avgYellow1, avgRed2, avgYellow2])
+                        #labelList = [derby1 + " Red Cards\n" + str(avgYellow1), derby1 + " Yellow Cards\n" + str(avgRed), derby2 + " Red Cards\n" + str(avgYellow2), derby2 + " Yellow Cards\n" + str(avgRed2)]
+                        fig = plt.figure()
+                        derbies = [derby1 + "\nAvg Yellows", derby1 + "\nAvg Reds", derby2 + "\nAvg Yellows", derby2 + "\nAvg Reds"]
                         print(derby1, "Average Red Cards: ", avgYellow1)
                         print(derby2, "Average Red Cards:", avgYellow2)
                         print(derby1, "Average Yellow Cards: ", avgRed)
                         print(derby2, "Average Yellow Cards: ", avgRed2)
                         print(f'Processed {line_count} lines.')
                         plt.title("Average Cards")
-                        plt.pie(pieVal, labels = labelList, shadow = True)
+                        plt.bar(derbies, barVal)
                         plt.show()
 
             main()
